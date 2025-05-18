@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Task Manager</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+<!-- Toast Container -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+  <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toast-body">
+        <!-- Toast message goes here -->
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div class="card shadow-sm border-0 mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+      <h5 class="mb-0">📝 Task Manager</h5>
+      <button onclick="logout()" class="btn btn-sm btn-outline-light">Logout</button>
+    </div>
+
+    <div class="card-body">
+      <!-- Task Form -->
+      <form id="task-form" class="p-3">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label for="title" class="form-label fw-semibold">Task Title</label>
+            <input type="text" id="title" class="form-control" placeholder="Enter task title" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="description" class="form-label fw-semibold">Description</label>
+            <textarea id="description" class="form-control" placeholder="Optional description" rows="1"></textarea>
+          </div>
+
+          <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-dark">➕ Add Task</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+   <!-- Task Table -->
+  <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th style="width: 80%;">Title</th>
+          <th style="width: 10%;">Status</th>
+          <th style="width: 10%;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="task-table-body">
+        <!-- Tasks will be populated here -->
+      </tbody>
+  </table>
+
+</div>
+
+ 
+
+
+<!-- Edit Task Modal -->
+<div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form id="edit-task-form" class="modal-content shadow-lg border-0 rounded-3">
+      <!-- Modal Header -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="editTaskModalLabel">
+          ✏️ Edit Task
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <input type="hidden" id="edit-task-id" />
+
+        <div class="mb-3">
+          <label for="edit-task-title" class="form-label fw-semibold">Title</label>
+          <input type="text" class="form-control" id="edit-task-title" placeholder="Enter task title" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="edit-task-description" class="form-label fw-semibold">Description</label>
+          <textarea id="edit-task-description" class="form-control" placeholder="Task Description" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="edit-task-status" class="form-label fw-semibold">Status</label>
+          <select class="form-select" id="edit-task-status">
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer bg-light">
+        <button type="submit" class="btn btn-success">
+          💾 Save Changes
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          ❌ Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Spinner Overlay -->
+<div id="loading-spinner" class="position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex justify-content-center align-items-center d-none" style="z-index: 2000;">
+  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+
+    const logout = () => {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+
+  </script>
+</body>
+</html>
