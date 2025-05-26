@@ -18,10 +18,28 @@
     editModal = new bootstrap.Modal(modalElement);
   }
 
-  if (!token) {
-    window.location.href = '/login';
+  if (token) {
+    const payload = parseJwt(token);
+    if (payload) {
+      const now = Date.now() / 1000; // current time in seconds
+      
+      if (payload.exp < now) {
+        // Token expired
+        localStorage.removeItem('token');
+        localStorage.removeItem('roleId');
+        localStorage.removeItem('username');
+        alert('Session expired. Please log in again.');
+        window.location.href = '/login'; 
+      } 
+    } else {
+      // Invalid token format, clear it out
+      localStorage.removeItem('jwtToken');
+      window.location.href = '/login';
+    }
+  } else {
+    // No token found, redirect to login
+      window.location.href = '/login';
   }
-
 
    if (token) {
       const payload = parseJwt(token);
