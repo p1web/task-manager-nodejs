@@ -1,0 +1,11 @@
+.fixed-card {
+  height: 520px; /* Adjust height as needed */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.fixed-card .card-body {
+  overflow-y: auto;
+  flex: 1; /* Fills remaining space */
+}

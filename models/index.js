@@ -1,18 +1,14 @@
-const { Sequelize, DataTypes } = require('sequelize');
+// models/index.js
 const sequelize = require('../config/db');
+const { Sequelize, DataTypes } = require('sequelize');
 
-const db = {};
+const User = require('./User');
+const Role = require('./Role');
+const Task = require('./Task');
 
-// Initialize models
-db.User = require('./User')(sequelize, DataTypes);
-db.Task = require('./Task')(sequelize, DataTypes);
+User.belongsTo(Role, { foreignKey: 'roleId' });
+Role.hasMany(User, { foreignKey: 'roleId' });
+User.hasMany(Task, { foreignKey: 'user_id' });
+Task.belongsTo(User, { foreignKey: 'user_id' });
 
-// Setup associations (after models are defined)
-if (db.User.associate) db.User.associate(db);
-if (db.Task.associate) db.Task.associate(db);
-
-// Attach sequelize instance and Sequelize class
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+module.exports = { sequelize, User, Role, Task };

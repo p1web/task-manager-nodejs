@@ -1,11 +1,16 @@
+// models/task.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-// const User = require('./User'); 
+const sequelize = require('../config/db'); // Adjust path as needed
+const User = require('./User'); // Adjust path as needed
 
 const Task = sequelize.define('Task', {
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'id',
+    },
   },
   title: {
     type: DataTypes.STRING,
@@ -19,19 +24,20 @@ const Task = sequelize.define('Task', {
     type: DataTypes.STRING,
     defaultValue: 'pending',
   },
+  priority: {
+    type: DataTypes.ENUM('Low', 'Medium', 'High'),
+    defaultValue: 'Medium',
+  },
+  dueDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  
 }, {
-  tableName: 'tasks' ,
-  timestamps: true, 
+  tableName: 'Tasks',
+  timestamps: true,
 });
 
-// Optional association if you're using Sequelize models in a central index.js
-// Task.associate = function(models) {
-//   Task.belongsTo(models.User, { foreignKey: 'user_id' });
-// };
-
-
-// Establish the relationship between Task and User
-// Task.belongsTo(User, { foreignKey: 'user_id' }); // Task belongs to User
-
+Task.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = Task;

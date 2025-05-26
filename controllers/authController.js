@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
 // Register user
 exports.register = async (req, res) => {
-  const { username, password } = req.body;
+  const { firstname, lastname, email, mobile, username, password } = req.body;
 
   try {
     
@@ -17,8 +17,13 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         
         const insert_info = { 
+            firstName:firstname,
+            lastName:lastname,
+            email:email,
+            mobile:mobile,
             username:username, 
-            password: hashedPassword 
+            password:hashedPassword,            
+            roleId: 2  
         }
 
         const newUser = await User.create(insert_info);
@@ -26,6 +31,7 @@ exports.register = async (req, res) => {
         res.status(201).json({ message: 'User registered successfully' });
 
   } catch (err) {
+    console.log(err);
         res.status(500).json({ message: 'Server error' });
   }
 };
@@ -46,12 +52,16 @@ exports.login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign(
-        // { userId: user.id }, 
-        { id: user.id, username: user.username },
+        { id: user.id, roleId: user.roleId, username: user.username },
         JWT_SECRET, 
         { expiresIn: '1h' });
 
-    res.json({ token });
+
+    res.json({
+      token,
+      username: user.username,
+      roleId: user.roleId
+    });
 
   } catch (err) {
     res.status(500).json({ message: 'Server error' });

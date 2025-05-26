@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const sequelize = require('./config/db');
 const taskRoutes = require('./routes/taskRoutes');
+const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount Routes
 app.use('/api/tasks',taskRoutes);
+app.use('/api/users',userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/', pageRoutes);
 

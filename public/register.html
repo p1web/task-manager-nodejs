@@ -22,20 +22,44 @@
   <div class="container py-5">
     <h2 class="text-center mb-4">Register</h2>
     
-    <form id="register-form" class="card p-4 mx-auto" style="max-width: 400px;">
-      <div class="mb-3">
-        <label for="register-username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="register-username" required />
-      </div>
-      <div class="mb-3">
-        <label for="register-password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="register-password" required />
-      </div>
-      <button type="submit" class="btn btn-success w-100">Register</button>
-      <div class="text-center mt-2">
-        Already have an account? <a href="/login">Login</a>
+    <form id="register-form" class="card p-4 mx-auto" style="max-width: 800px;">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="register-firstname" class="form-label">First Name</label>
+          <input type="text" class="form-control" name="register-firstname" id="register-firstname" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="register-lastname" class="form-label">Last Name</label>
+          <input type="text" class="form-control" name="register-lastname" id="register-lastname" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="register-email" class="form-label">Email</label>
+          <input type="email" class="form-control"  name="register-email" id="register-email" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="register-mobile" class="form-label">Mobile</label>
+          <input type="text" class="form-control" name="register-mobile" id="register-mobile" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="register-username" class="form-label">Username</label>
+          <input type="text" class="form-control" name="register-username" id="register-username" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="register-password" class="form-label">Password</label>
+          <input type="password" class="form-control" name="register-password" id="register-password" required />
+        </div>
+
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <button type="submit" class="btn btn-success">Register</button>
+          Already have an account?<a href="/login" class="btn btn-link">Login</a>
+        </div>
+
       </div>
     </form>
+
+    
   </div>
 
   <!-- Spinner Overlay -->
@@ -44,8 +68,10 @@
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-  
+
+  <script src="js/jquery-3.7.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
   <script src="js/auth.js"></script>
   
 </body>

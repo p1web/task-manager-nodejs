@@ -7,8 +7,12 @@
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  
 </head>
 <body class="bg-light">
+
+<div id="header"></div>
 
 <!-- Toast Container -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
@@ -23,52 +27,39 @@
 </div>
 
 
-<div class="container mt-5">
-  <div class="card shadow-sm border-0 mb-3">
+<div class="container mt-3">
+  <div class="card fixed-card shadow-sm border-0 mb-3">
     <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-      <h5 class="mb-0">📝 Task Manager</h5>
-      <button onclick="logout()" class="btn btn-sm btn-outline-light">Logout</button>
+      <h5 class="mb-0">📝 To Do List</h5>
+      <a href="/add-task"  class="btn btn-sm btn-outline-light">+ New Task</a>
     </div>
 
     <div class="card-body">
-      <!-- Task Form -->
-      <form id="task-form" class="p-3">
-        <div class="row g-3 align-items-end">
-          <div class="col-md-4">
-            <label for="title" class="form-label fw-semibold">Task Title</label>
-            <input type="text" id="title" class="form-control" placeholder="Enter task title" required />
-          </div>
 
-          <div class="col-md-6">
-            <label for="description" class="form-label fw-semibold">Description</label>
-            <textarea id="description" class="form-control" placeholder="Optional description" rows="1"></textarea>
-          </div>
-
-          <div class="col-md-2 d-grid">
-            <button type="submit" class="btn btn-dark">➕ Add Task</button>
-          </div>
-        </div>
-      </form>
+      <!-- Task Table -->
+      <table class="table table-bordered table-striped">
+          <thead class="table-info">
+            <tr>
+              <th style="width: 60%;">Title</th>
+              <th style="width: 10%;">Priority</th>
+              <th style="width: 10%;">Due Date</th>
+              <th style="width: 10%;">Status</th>
+              <th style="width: 10%;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="task-table-body">
+            <!-- Tasks will be populated here -->
+          </tbody>
+      </table>
     </div>
   </div>
 
-   <!-- Task Table -->
-  <table class="table table-bordered table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th style="width: 80%;">Title</th>
-          <th style="width: 10%;">Status</th>
-          <th style="width: 10%;">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="task-table-body">
-        <!-- Tasks will be populated here -->
-      </tbody>
-  </table>
+   
 
 </div>
 
- 
+
+<div id="footer"></div>
 
 
 <!-- Edit Task Modal -->
@@ -98,11 +89,25 @@
         </div>
 
         <div class="mb-3">
+          <label for="edit-task-priority" class="form-label">Priority</label>
+          <select class="form-select" id="edit-task-priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="edit-task-dueDate" class="form-label">Due Date</label>
+          <input id="edit-task-dueDate" class="form-control" type="date" required>
+        </div>
+
+        <div class="mb-3">
           <label for="edit-task-status" class="form-label fw-semibold">Status</label>
-          <select class="form-select" id="edit-task-status">
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
+          <select class="form-select" id="edit-task-status" required>
+            <option value="Pending">Pending</option>
+            <option value="In-Progress">In Progress</option>
+            <option value="Completed">Completed</option>
           </select>
         </div>
       </div>
@@ -121,24 +126,11 @@
 </div>
 
 
-<!-- Spinner Overlay -->
-<div id="loading-spinner" class="position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex justify-content-center align-items-center d-none" style="z-index: 2000;">
-  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-
-
   <!-- Bootstrap JS -->
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/helpers.js"></script>
   <script src="js/script.js"></script>
-  <script>
-
-    const logout = () => {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    }
-
-  </script>
+  
 </body>
 </html>
