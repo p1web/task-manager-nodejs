@@ -10,4 +10,6 @@ router.use(authenticate);
 // GET all tasks
 router.get('/', userController.getUsers);
 
+router.post('/send-test-email', userController.sendTestEmail);
+
 module.exports = router;

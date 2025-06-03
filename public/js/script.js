@@ -92,7 +92,7 @@
             }
           });
 
-          console.log('Response status:', res.status);
+          // console.log('Response status:', res.status);
 
           const userList = await res.json();
           
@@ -112,8 +112,8 @@
               <td>${ userInfo.username }</td>
               <td>
                 <a href="" class="btn btn-info">View</a>
-                <a href="" class="btn btn-info">Send Test Email</a>
-                </td>
+                <a href="" data-email="${ userInfo.email }" class="btn btn-info sendTestEmailBtn" id="sendTestEmailBtn">Send Test Email</a>
+              </td>
             `;
             userTableBody.appendChild(row);
           });
@@ -124,6 +124,42 @@
         }
       }
   };
+
+
+  // Delegated event listener on table body
+  if (userTableBody) {
+  userTableBody.addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    if (event.target.classList.contains('sendTestEmailBtn')) {
+      const email = event.target.getAttribute('data-email');
+
+      try {
+        const response = await fetch('/api/users/send-test-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ email })  // matches your backend field
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert(`Email sent successfully to ${email}`);
+        } else {
+          alert(`Failed to send email to ${email}: ${data.message}`);
+        }
+      } catch (err) {
+        console.error('Error sending email:', err);
+        alert('Error sending email.');
+      }
+    }
+  });
+}
+
+
 
   const fetchTasks = async () => {
 
