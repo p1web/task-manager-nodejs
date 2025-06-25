@@ -1,13 +1,15 @@
 const { now } = require('sequelize/lib/utils');
 const Task = require('../models/Task');
 const User = require('../models/User');
+const logActivity = require('../helper/activityLogger');
+// const { Activity } = require('../models');
 
 // Get all tasks
 exports.getTasks = async (req, res) => {
   const userId = req.user.id;
   const roleId = req.user.roleId; 
-
-  try {
+  
+    try {
       const tasks = await Task.findAll({
         where: roleId === 1 ? {} : { user_id: userId }, // Admin gets all
         order: [['createdAt', 'DESC']]
@@ -36,8 +38,25 @@ exports.createTask = async (req, res) => {
       user_id: userId             
     }
 
-  const task = await Task.create(taskInfo);
-  res.status(201).json(task);
+  try {
+    
+    const task = await Task.create(taskInfo);
+
+    await logActivity({
+        userId,
+        action: req.user.username + ' created a new task',
+        impactedData: JSON.stringify(task.toJSON()), // Pass the full row or selected fields
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent']
+      });
+
+    res.status(201).json(task);
+
+  } catch (error) {
+     console.error(error)
+      res.status(500).json({ message: 'Error inserting task' });
+  }
+ 
 };
 
 // Update a task
@@ -57,6 +76,14 @@ exports.updateTask = async (req, res) => {
 
   await task.save();
 
+  await logActivity({
+    userId: req.user.id,
+    action: req.user.username + ' updated a task',
+    impactedData: JSON.stringify(task.toJSON()),
+    ipAddress: req.ip,
+    userAgent: req.headers['user-agent']
+  });
+
   res.json(task);
 };
 
@@ -69,5 +96,14 @@ exports.deleteTask = async (req, res) => {
   if (!task) return res.status(404).json({ message: 'Task not found' });
 
   await task.destroy();
+
+  await logActivity({
+    userId: req.user.id,
+    action: req.user.username + ' deleted a task',
+    impactedData: JSON.stringify(task.toJSON()),
+    ipAddress: req.ip,
+    userAgent: req.headers['user-agent']
+  });
+  
   res.json({ message: 'Task deleted' });
 }

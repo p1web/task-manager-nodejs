@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = document.getElementById('login-password').value;
       
       showSpinner();
-
+      
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
@@ -166,7 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('username', data.username);
         localStorage.setItem('roleId', data.roleId);
-        setTimeout(() => window.location.href = '/', 1000);
+        if(data.roleId==1)
+        setTimeout(() => window.location.href = '/dashboard', 1000);
+        else
+        setTimeout(() => window.location.href = '/to-do', 1000);
+        
       } else {
         showToast(data.message || 'Login failed', 'danger');
       }

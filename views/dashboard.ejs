@@ -1,0 +1,108 @@
+<div class="container mt-3">
+  <div class="card shadow-sm border-0 mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+      <h5 class="mb-0">Dashboard</h5>
+    </div>
+
+    <div class="card-body">
+
+    <div class="row g-3 mb-4">
+
+      <div class="col-md-3">
+        <div class="card card-box" title="Total number of registered users">
+          <h6><i class="fas fa-users card-icon"></i>Total Users</h6>
+          <h3 id="totalUsers" class="count" data-target=""><%= totalUsers %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card card-box" title="All created tasks">
+          <h6><i class="fas fa-tasks card-icon"></i>Total Tasks</h6>
+          <h3 id="totalTasks" class="count" data-target=""><%= totalTasks %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card card-box" title="Tasks that have been marked as complete">
+          <h6><i class="fas fa-check-circle card-icon"></i>Completed Tasks</h6>
+          <h3 id="completedTasks" class="count" data-target=""><%= completedTasks %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card card-box" title="Remaining tasks yet to be completed">
+          <h6><i class="fas fa-hourglass-half card-icon"></i>Pending Tasks</h6>
+          <h3 id="pendingTasks" class="count" data-target=""><%= pendingTasks %></h3>
+        </div>
+      </div>
+
+    </div>
+
+
+
+      <!-- Charts & Recent Activity -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card p-3 h-100">
+            <h6 class="mb-3">Tasks Overview</h6>
+            <canvas id="myChart" width="400" height="200"></canvas>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card p-3 h-100">
+            <h6 class="mb-3">Recent Activity</h6>
+            <ul class="list-group list-group-flush" id="recentActivity">
+              <li class="list-group-item">User John created a new task.</li>
+              <li class="list-group-item">Task #101 marked as completed.</li>
+              <li class="list-group-item">New user Priya registered.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task Summary Table -->
+      <!-- <div class="card p-3">
+        <h6 class="mb-3">Task Summary</h6>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Task Title</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>Due Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>101</td>
+                <td>Fix login issue</td>
+                <td>John Doe</td>
+                <td><span class="badge bg-success">Completed</span></td>
+                <td>2025-06-21</td>
+              </tr>
+              <tr>
+                <td>102</td>
+                <td>Design dashboard UI</td>
+                <td>Priya Sharma</td>
+                <td><span class="badge bg-warning text-dark">In Progress</span></td>
+                <td>2025-06-25</td>
+              </tr>
+              <tr>
+                <td>103</td>
+                <td>API integration</td>
+                <td>Ravi Kumar</td>
+                <td><span class="badge bg-danger">Overdue</span></td>
+                <td>2025-06-18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+
+
+
+    </div>
+  </div>
+</div>

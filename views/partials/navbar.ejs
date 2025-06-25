@@ -1,0 +1,74 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="img/to-do-logo.png" alt="Logo" width="150" class="d-inline-block align-text-top me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+       <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link <%= currentRoute === '/home' ? 'active' : '' %>" aria-current="page" href="/">Home</a>
+        </li>
+        <!-- menu items will be visible only after user login  -->
+        <% if (user) { %>
+        <% if (user.roleId === 1) { %>
+        <li class="nav-item">
+          <a class="nav-link <%= currentRoute === '/dashboard' ? 'active' : '' %>" aria-current="page" href="/dashboard">Dashboard </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= currentRoute === '/to-do' ? 'active' : '' %>" href="/to-do">To Do List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= currentRoute === '/team-member' ? 'active' : '' %>" href="/team-member">Team Members</a>
+        </li>
+        <% } %>
+
+        <% if (user.roleId === 2) { %>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentRoute === '/to-do' ? 'active' : '' %>" href="/to-do">To Do List</a>
+        </li>   
+        <!-- <li class="nav-item">
+          <a class="nav-link <%= currentRoute === '/team-chat' ? 'active' : '' %>" href="/team-chat">Team Chat</a>
+        </li> -->
+
+        <% } %>
+
+       <% } else{ %>
+
+         <li class="nav-item">
+            <a class="nav-link <%= currentRoute === '/login' ? 'active' : '' %>" href="/login">Login</a>
+        </li>
+        <% } %>
+      </ul>
+
+      <% if (user) { %>
+
+         <!-- Right-aligned user dropdown -->
+        <ul class="navbar-nav ms-auto"  id="user-dropdown">
+          <li class="nav-item dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="navbar-username"><%= (user.username)? user.username:'Guest User' %></span>
+              
+              <img src="img/default_user2.png" alt="Profile" class="rounded-circle me-2" width="75" height="75">            
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#" id="logout-btn">🚪 Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+      <% } %>
+
+    </div>
+    </div>
+    
+  </div>
+</nav>

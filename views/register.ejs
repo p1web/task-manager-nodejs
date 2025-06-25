@@ -1,25 +1,16 @@
-<!-- public/register.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Register</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body class="bg-light">
-    <!-- Toast Container -->
-    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
-        <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-            <div class="toast-body" id="toast-body">
-                <!-- Toast message goes here -->
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
+ <!-- Toast Container -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+        <div class="toast-body" id="toast-body">
+            <!-- Toast message goes here -->
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
+</div>
 
-  <div class="container py-5">
+<div class="container py-5">
     <h2 class="text-center mb-4">Register</h2>
     
     <form id="register-form" class="card p-4 mx-auto" style="max-width: 800px;">
@@ -61,18 +52,3 @@
 
     
   </div>
-
-  <!-- Spinner Overlay -->
-<div id="loading-spinner" class="position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex justify-content-center align-items-center d-none" style="z-index: 2000;">
-  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-
-  <script src="js/jquery-3.7.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/jquery.validate.min.js"></script>
-  <script src="js/auth.js"></script>
-  
-</body>
-</html>

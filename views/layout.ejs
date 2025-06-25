@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title || 'My App' %></title>
+
+  <!-- Bootstrap CSS -->
+    
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+<%- include('partials/navbar', { currentRoute: currentRoute, user: user }) %>
+
+<!-- Toast Container -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+  <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toast-body">
+        <!-- Toast message goes here -->
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+
+
+<%- body %>
+
+<div class="chat-box" id="chatBox">
+   <div class="chat-header">
+    Chat Assistant
+    <button class="close-btn" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-message bot">Hello! How can I help you today?</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+<!-- Chat Toggle Button -->
+<button class="chat-btn" onclick="toggleChat()"><img src="img/helpdesk.gif" alt="" srcset=""></button>
+
+
+<%- include('partials/footer', { user: user }) %>
+
+<%- typeof scripts !== 'undefined' ? scripts : '' %>
+
+</body>
+</html>

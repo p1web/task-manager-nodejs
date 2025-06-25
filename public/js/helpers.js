@@ -15,4 +15,7 @@ window.helpers = {
       date.getFullYear()  // Year
     ].join('-');  // Returns the date in "dd-mm-yyyy" format
   }
+  
 };
+
+

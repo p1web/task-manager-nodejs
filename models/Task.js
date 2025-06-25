@@ -22,7 +22,7 @@ const Task = sequelize.define('Task', {
   },
   status: {
     type: DataTypes.STRING,
-    defaultValue: 'pending',
+    defaultValue: 'Pending',
   },
   priority: {
     type: DataTypes.ENUM('Low', 'Medium', 'High'),

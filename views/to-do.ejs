@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Task Manager</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" />
-  
-</head>
-<body class="bg-light">
-
-<div id="header"></div>
-
-<!-- Toast Container -->
-<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
-  <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-      <div class="toast-body" id="toast-body">
-        <!-- Toast message goes here -->
-      </div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-  </div>
-</div>
-
-
 <div class="container mt-3">
   <div class="card fixed-card shadow-sm border-0 mb-3">
     <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
       <h5 class="mb-0">📝 To Do List</h5>
+      <% if (user.roleId === 2) { %>
       <a href="/add-task"  class="btn btn-sm btn-outline-light">+ New Task</a>
+      <% } %>
     </div>
 
     <div class="card-body">
@@ -40,7 +13,7 @@
       <table class="table table-bordered table-striped">
           <thead class="table-info">
             <tr>
-              <th style="width: 60%;">Title</th>
+              <th style="width: 50%;">Title</th>
               <th style="width: 10%;">Priority</th>
               <th style="width: 10%;">Due Date</th>
               <th style="width: 10%;">Status</th>
@@ -53,14 +26,7 @@
       </table>
     </div>
   </div>
-
-   
-
 </div>
-
-
-<div id="footer"></div>
-
 
 <!-- Edit Task Modal -->
 <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
@@ -124,13 +90,3 @@
     </form>
   </div>
 </div>
-
-
-  <!-- Bootstrap JS -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/common.js"></script>
-  <script src="js/helpers.js"></script>
-  <script src="js/script.js"></script>
-  
-</body>
-</html>

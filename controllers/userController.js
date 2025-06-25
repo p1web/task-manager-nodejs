@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const { sendEmail } = require('../models/emailService');
+const { generateEmailTemplate } = require('../helper/emailTemplateHelper');
 // Get all tasks
 const getUsers = async (req, res) => {
 //   const userId = req.user.id;
@@ -8,7 +9,7 @@ const getUsers = async (req, res) => {
 
   try {
       const users = await User.findAll({
-          attributes: ['firstName', 'lastName', 'email', 'mobile', 'username', 'createdAt', 'updatedAt'],
+          attributes: ['firstName', 'lastName', 'email', 'mobile', 'username', 'profile_img', 'createdAt', 'updatedAt'],
           order: [['id', 'DESC']]
       });
 
@@ -20,7 +21,7 @@ const getUsers = async (req, res) => {
     }
 };
 
-
+// sending test email
 const sendTestEmail = async (req, res) => {
   const { email } = req.body;
 
@@ -29,10 +30,15 @@ const sendTestEmail = async (req, res) => {
   }
 
   try {
+
+    const subject = 'Test Email from Node.js Backend';
+    const message = 'This is a test email sent from the backend using Node.js.';
+    const htmlContent = generateEmailTemplate(email, subject, message);
+
     await sendEmail(
       email,
-      'Test Email from Node.js',
-      `Hello ${email}! This is a test email sent from the backend.`
+      subject,
+      htmlContent
     );
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
